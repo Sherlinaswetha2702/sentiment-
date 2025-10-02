@@ -1,1 +1,29 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tweets Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Tweets Analysis for "{{ keyword }}"</h1>
+        {% if tweets %}
+            <ul>
+                {% for tweet, sentiment in zip(tweets, sentiments) %}
+                    <li>
+                        <p><strong>Tweet:</strong> {{ tweet }}</p>
+                        <p><strong>Sentiment:</strong> {{ sentiment.sentiment }}</p>
+                        <p><strong>Polarity Score:</strong> {{ sentiment.polarity }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tweets found for the given keyword.</p>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="button">Back to Analysis</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
